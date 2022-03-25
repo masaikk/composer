@@ -10,10 +10,12 @@
 <script>
 import { ref } from "vue";
 import axios from "axios";
+import { useStore } from "vuex";
 
 export default {
   name: "getLyrics",
   setup() {
+    const store = useStore();
     let lyrics = ref("this is a sentence");
     let developFlag = ref(true);
     const developmentURL = "http://127.0.0.1:8000/form/getAudioPath/";
@@ -34,17 +36,25 @@ export default {
             "\r\n",
             response.config
           )*/
-          console.log("Got audio url : " + response.data);
+          // console.log("Got audio url : " + response.data);
+          store.commit("setAudioURLAndFlag", {
+            audioURL: response.data,
+          });
         })
         .catch((err) => {
           alert(err);
         });
+    };
+    const showInfoFromStore = () => {
+      let info = store.getters.audioInfo;
+      console.log(info);
     };
 
     return {
       lyrics,
       developFlag,
       sendAjax,
+      showInfoFromStore,
     };
   },
 };

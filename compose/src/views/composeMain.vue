@@ -20,6 +20,7 @@
 
 <script>
 import { reactive, onBeforeMount } from "vue";
+
 import audioPlayerComp from "@/components/audioPlayerComp";
 import getLyrics from "@/components/getLyrics";
 
