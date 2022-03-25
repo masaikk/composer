@@ -18,6 +18,7 @@
 <script>
 import { toRefs, h } from "vue";
 import { ElNotification } from "element-plus";
+import { useStore } from "vuex";
 
 export default {
   name: "audioPlayerComp",
@@ -26,15 +27,15 @@ export default {
     // TODO: 思考为什么这两个的proxy是readonly的属性？
     let { defaultMessage, defaultAudioURL } = toRefs(props);
 
+    const store = useStore();
+
     // get new audio url from localStorage
     const getAudioURL = () => {
-      let randomNumber = Math.floor(1 + 4 * Math.random());
-      // TODO: must fix this
-      // 获取真实的数据
-      return `http://119.23.182.180/azur/t${randomNumber}.mp3`;
+      let audioInfo = store.getters.audioInfo;
+      return audioInfo.audioURL;
     };
 
-    // A function which will be used when play is end
+    // A function which will be used when audio play is end
     const endPlay = () => {
       ElNotification({
         title: "感谢聆听",

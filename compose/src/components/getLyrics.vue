@@ -11,6 +11,7 @@
 import { ref } from "vue";
 import axios from "axios";
 import { useStore } from "vuex";
+import { ElMessage } from "element-plus";
 
 export default {
   name: "getLyrics",
@@ -36,9 +37,13 @@ export default {
             "\r\n",
             response.config
           )*/
-          // console.log("Got audio url : " + response.data);
+          console.log("Got audio url : " + response.data);
           store.commit("setAudioURLAndFlag", {
             audioURL: response.data,
+          });
+          ElMessage({
+            message: "旋律已经生成！",
+            type: "success",
           });
         })
         .catch((err) => {
