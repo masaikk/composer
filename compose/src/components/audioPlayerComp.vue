@@ -37,8 +37,8 @@ export default {
     // A function which will be used when play is end
     const endPlay = () => {
       ElNotification({
-        title: "Title",
-        message: h("i", { style: "color: teal" }, "This is a reminder"),
+        title: "感谢聆听",
+        message: h("i", { style: "color: teal" }, "这里是歌词"),
       });
     };
 

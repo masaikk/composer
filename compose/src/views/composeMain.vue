@@ -7,6 +7,9 @@
       </div>
     </div>
     <div>
+      <get-lyrics></get-lyrics>
+    </div>
+    <div>
       <audio-player-comp
         :defaultMessage="audioInfo.defaultMessage"
         :defaultAudioURL="audioInfo.defaultAudioURL"
@@ -18,6 +21,7 @@
 <script>
 import { reactive, onBeforeMount } from "vue";
 import audioPlayerComp from "@/components/audioPlayerComp";
+import getLyrics from "@/components/getLyrics";
 
 export default {
   name: "composeMain",
@@ -48,6 +52,7 @@ export default {
   },
   components: {
     audioPlayerComp,
+    getLyrics,
   },
 };
 </script>
