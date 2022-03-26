@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div>占位</div>
+    <div>获取歌词的组件</div>
     <div>
-      <el-button @click="sendAjax">sendTO</el-button>
+      <el-button @click="sendAjax">合成旋律！</el-button>
     </div>
   </div>
 </template>
@@ -22,33 +22,34 @@ export default {
     const developmentURL = "http://127.0.0.1:8000/form/getAudioPath/";
 
     const sendAjax = () => {
+      ElMessage({ showClose: true, message: "合成请求已经发送！" });
       axios
-        .get(developmentURL)
+        .get(developmentURL, {
+          params: {
+            // 一些请求的参数
+            lyrics: lyrics.value,
+          },
+        })
         .then((response) => {
-          /*        alert(
-          "".concat(
-            response.data,
-            "\r\n",
-            response.status,
-            "\r\n",
-            response.statusText,
-            "\r\n",
-            response.headers,
-            "\r\n",
-            response.config
-          )*/
           console.log("Got audio url : " + response.data);
           store.commit("setAudioURLAndFlag", {
             audioURL: response.data,
           });
+          store.commit("setLyrics", lyrics);
 
           ElMessage({
-            message: "旋律已经生成！",
+            showClose: true,
+            message: "旋律已经生成！\n 请点击下方按钮播放！",
             type: "success",
           });
         })
         .catch((err) => {
           alert(err);
+          ElMessage({
+            showClose: true,
+            message: "抱歉，旋律生成错误！\n请稍后重试！",
+            type: "error",
+          });
         });
     };
     const showInfoFromStore = () => {

@@ -1,15 +1,10 @@
 <template>
   <div>
     <p>
-      {{ defaultMessage }}
+      {{ audioData.audioMessage }}
     </p>
     <div>
-      <audio
-        controls
-        src="http://119.23.182.180/azur/t1.mp3"
-        ref="mainAudioNode"
-        @ended="endPlay"
-      ></audio>
+      <audio src="" ref="mainAudioNode" @ended="endPlay"></audio>
 
       <el-button @click="changeAudioAndReload">change audio</el-button>
     </div>
@@ -17,7 +12,7 @@
 </template>
 
 <script>
-import { toRefs, h, computed, watch, getCurrentInstance } from "vue";
+import { toRefs, h, reactive } from "vue";
 import { ElNotification } from "element-plus";
 import { useStore } from "vuex";
 
@@ -25,8 +20,15 @@ export default {
   name: "audioPlayerComp",
   props: ["defaultMessage", "defaultAudioURL"],
   setup(props) {
-    // TODO: 思考为什么这两个的proxy是readonly的属性？
-    let { defaultMessage, defaultAudioURL } = toRefs(props);
+    const { defaultMessage, defaultAudioURL } = toRefs(props);
+
+    let audioData = reactive({
+      audioMessage: defaultMessage.value,
+      audioURL: defaultAudioURL.value,
+    });
+
+    /*    // 获取音乐播放节点
+        const mainAudioNode = ref(null);*/
 
     // 获取VueX
     const store = useStore();
@@ -37,41 +39,51 @@ export default {
       return audioInfo.audioURL;
     };
 
-    // 监听VueX里面存储的audioURL是否有变化,readonly
-    const audioURLFromStore = computed(() => {
-      return store.getters.audioInfo.audioURL;
-    });
-    watch(audioURLFromStore, (nowValue, pastValue) => {
-      console.log("now : " + nowValue);
-      console.log("past : " + pastValue);
-      // 监听之后启动reload方法，但是需要把下面的changeAudioAndReload重写至setup
+    /*    // 监听VueX里面存储的audioURL是否有变化,readonly
+        const audioURLFromStore = computed(() => {
+          return store.getters.audioInfo.audioURL;
+        });*/
 
-      changeAudioAndReloadSetup();
-    });
+    /*    watchEffect(
+          () => {
+            console.log(mainAudioNode.value);
+
+            changeAudioAndReloadSetup();
+          },
+          {
+            flush: "post",
+          }
+        );*/
+
+    /*    watch(audioURLFromStore, (nowValue, pastValue) => {
+          console.log("now : " + nowValue);
+          console.log("past : " + pastValue);
+          // 监听之后启动reload方法，但是需要把下面的changeAudioAndReload重写至setup
+        });*/
 
     // A function which will be used when audio play is end
     const endPlay = () => {
+      // 从VueX中获取歌词信息用于在消息框中表示
+      let lyrics = store.getters.getLyrics();
+
       ElNotification({
         title: "感谢聆听",
-        message: h("i", { style: "color: teal" }, "这里是歌词"),
+        message: h("i", { style: "color: teal" }, lyrics),
       });
     };
 
-    const changeAudioAndReloadSetup = () => {
-      /*      mainAudio.value.src = this.getAudioURL();
-      mainAudio.value.play();*/
-      // TODO: 改正一下获取不到的问题
-      console.log("changeAudioAndReloadSetup");
-    };
+    /*    const changeAudioAndReloadSetup = (audioNode) => {
+          let nowAudioURL = getAudioURL();
+          console.log(audioNode.value);
+          audioNode.value.src = nowAudioURL;
+          audioNode.value.play();
+          console.log("changeAudioAndReloadSetup " + nowAudioURL);
+        };*/
 
     return {
-      // eslint-disable-next-line
-      defaultMessage,
-      // eslint-disable-next-line
-      defaultAudioURL,
+      audioData,
       endPlay,
       getAudioURL,
-      // audioURLFromStore,
     };
   },
   methods: {
