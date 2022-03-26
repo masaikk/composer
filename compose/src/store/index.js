@@ -4,12 +4,14 @@ export default createStore({
   state: {
     currentAudioURL: "http://119.23.182.180/azur/t1.mp3",
     isUsedFlag: false,
+    isFlesh: false,
   },
   getters: {
     audioInfo(state) {
       return {
         audioURL: state.currentAudioURL,
         usedFlag: state.isUsedFlag,
+        fleshFlag: state.isFlesh,
       };
     },
   },

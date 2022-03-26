@@ -41,6 +41,7 @@ export default {
           store.commit("setAudioURLAndFlag", {
             audioURL: response.data,
           });
+
           ElMessage({
             message: "旋律已经生成！",
             type: "success",
