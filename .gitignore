@@ -17,3 +17,6 @@ bin-release/
 # should NOT be excluded as they contain compiler settings and other important
 # information for Eclipse / Flash Builder.
 /.idea/
+/access/lyrics/utils/lyrics/
+/access/lyrics/utils/model/static/gen_800.pth
+/access/lyrics/utils/lyrics/temp

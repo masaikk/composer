@@ -1,0 +1,37 @@
+cuda: 0
+start: 1
+load_model: 0
+
+embed_dim: 20
+ff1_out: 100
+hidden_dim: 100
+generator_out_dim: 3
+discriminator_out_dim: 1
+
+lyrics_dis_rate: 0.75
+
+learning_rate_G: 0.1
+learning_rate_D: 0.01
+
+start_epoch: 0
+epochs: 500
+save_per_epoch: 50
+train_D_steps: 1
+train_G_steps: 1
+
+sequence_len: 20
+
+# RMC:
+mem_slots: 1
+num_heads: 2
+head_size: 128
+
+EPS: 1e-4
+
+# for load data
+data_params:
+  batch_size: 300
+  shuffle: 1
+  num_workers: 6
+
+

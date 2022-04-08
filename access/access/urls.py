@@ -21,6 +21,6 @@ from privilege.views import mainPage
 urlpatterns = [
     path('', mainPage),
     path('admin/', admin.site.urls),
-
+    path('lyrics/', include('lyrics.urls')),
     path('user/', include('privilege.urls'))
 ]
