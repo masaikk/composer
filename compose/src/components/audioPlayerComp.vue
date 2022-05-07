@@ -44,17 +44,6 @@ export default {
           return store.getters.audioInfo.audioURL;
         });*/
 
-    /*    watchEffect(
-          () => {
-            console.log(mainAudioNode.value);
-
-            changeAudioAndReloadSetup();
-          },
-          {
-            flush: "post",
-          }
-        );*/
-
     /*    watch(audioURLFromStore, (nowValue, pastValue) => {
           console.log("now : " + nowValue);
           console.log("past : " + pastValue);

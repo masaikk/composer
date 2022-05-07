@@ -7,6 +7,7 @@ export default createStore({
     isUsedFlag: false,
     isFlesh: false,
     currentUid: 1,
+    currentName: "用户",
   },
   getters: {
     audioInfo(state) {
@@ -28,11 +29,14 @@ export default createStore({
         return state.currentUid;
       };
     },
+    getName(state) {
+      return function () {
+        return state.currentName;
+      };
+    },
   },
   mutations: {
     setAudioURLAndFlag(state, info) {
-      // console.log(state);
-      // console.log(info);
       state.currentAudioURL = info.audioURL;
       state.usedFlag = false;
     },
@@ -44,6 +48,12 @@ export default createStore({
     },
     setLyrics(state, lyrics) {
       state.currentLyrics = lyrics;
+    },
+    setUid(state, uid) {
+      state.currentUid = parseInt(uid);
+    },
+    setName(state, name) {
+      state.currentName = name;
     },
   },
   actions: {},

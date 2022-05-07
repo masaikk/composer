@@ -10,6 +10,12 @@
                 <use xlink:href="#icon-c"></use>
               </svg>
             </div>
+            <div>
+              <p>
+                欢迎您！ 用户ID为 {{ userInfo.uid }} 的用户
+                {{ userInfo.name }} !
+              </p>
+            </div>
           </el-container>
         </div>
       </el-header>
@@ -58,19 +64,16 @@
                   <el-icon>
                     <icon-menu />
                   </el-icon>
-                  <span>Navigator Two</span>
+                  <router-link to="/myself"> 我的信息 </router-link>
                 </el-menu-item>
-                <el-menu-item index="3" disabled>
-                  <el-icon>
-                    <document />
-                  </el-icon>
-                  <span>Navigator Three</span>
+                <el-menu-item index="3">
+                  <el-icon><reading /></el-icon>
+                  <router-link to="/history">我的历史</router-link>
                 </el-menu-item>
                 <el-menu-item index="4">
-                  <el-icon>
-                    <setting />
-                  </el-icon>
-                  <span>Navigator Four</span>
+                  <el-icon><question-filled /></el-icon>
+                  <!--                  <span>Navigator Four</span>-->
+                  <router-link to="/about">关于</router-link>
                 </el-menu-item>
               </el-menu>
             </el-col>
@@ -92,8 +95,16 @@
 </template>
 
 <script setup>
-import { Menu as IconMenu, Setting } from "@element-plus/icons-vue";
-import { onMounted, nextTick, ref } from "vue";
+import {
+  Menu as IconMenu,
+  QuestionFilled,
+  Reading,
+} from "@element-plus/icons-vue";
+import { onMounted, nextTick, ref, reactive } from "vue";
+import { useStore } from "vuex";
+
+// 获取VueX
+const store = useStore();
 
 const handleOpen = (key, keyPath) => {
   console.log(key, keyPath);
@@ -102,6 +113,10 @@ const handleClose = (key, keyPath) => {
   console.log(key, keyPath);
 };
 let height = ref("600px");
+let userInfo = reactive({
+  uid: 0,
+  name: "",
+});
 
 onMounted(() => {
   nextTick(() => {
@@ -109,6 +124,10 @@ onMounted(() => {
       (window.innerHeight - 200 < 600 ? 600 : window.innerHeight - 200) + "px";
 
     console.log(height.value);
+    userInfo.uid = store.getters.getUid();
+    userInfo.name = store.getters.getName();
+    console.log(userInfo.uid);
+    console.log(userInfo.name);
   });
 });
 </script>
