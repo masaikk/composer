@@ -22,6 +22,11 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "mainComposer" */ "../views/composeMain.vue"),
   },
+  {
+    path: "/history",
+    name: "history",
+    component: () => import("../views/melodyComposeHisView.vue"),
+  },
 ];
 
 const router = createRouter({

@@ -6,6 +6,7 @@ export default createStore({
     currentLyrics: "This is a sentence",
     isUsedFlag: false,
     isFlesh: false,
+    currentUid: 1,
   },
   getters: {
     audioInfo(state) {
@@ -20,6 +21,11 @@ export default createStore({
     getLyrics(state) {
       return function () {
         return state.currentLyrics;
+      };
+    },
+    getUid(state) {
+      return function () {
+        return state.currentUid;
       };
     },
   },
