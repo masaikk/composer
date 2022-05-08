@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-oacysgmdxo11%=*2#p%4!dx9k@7y=va1o76@y1lg#2ybv6t_7^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    '119.23.182.180'
+]
 
 # Application definition
 
@@ -38,10 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'privilege',
-    'lyrics'
+    'lyrics',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,7 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-'corsheaders.middleware.CorsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'access.urls'
@@ -138,13 +144,15 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 STATIC_ROOT = ''
-
 
 STATICFILES_DIRS = (
     # BASE_DIR + STATIC_URL,
     os.path.join(BASE_DIR, STATIC_ROOT),
 )
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8080',
+]

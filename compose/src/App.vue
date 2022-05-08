@@ -71,6 +71,10 @@
                   <router-link to="/history">我的历史</router-link>
                 </el-menu-item>
                 <el-menu-item index="4">
+                  <el-icon><reading /></el-icon>
+                  <router-link to="/main">合成音乐</router-link>
+                </el-menu-item>
+                <el-menu-item index="5">
                   <el-icon><question-filled /></el-icon>
                   <!--                  <span>Navigator Four</span>-->
                   <router-link to="/about">关于</router-link>

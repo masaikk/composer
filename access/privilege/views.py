@@ -53,3 +53,25 @@ def get_log(request):
         })
 
     return JsonResponse(response_logs)
+
+
+def get_user_info(request):
+    """
+
+    @param request: uid
+    @return:
+    """
+    uid = request.GET.get('uid')
+    user_info = User.objects.filter(uid=int(uid))
+    res_info={
+        "uid": 0,
+        "username":'',
+        "phone_number":'',
+        "user_time":''
+    }
+    for info in user_info:
+        res_info['uid']=uid
+        res_info['username']=info.username
+        res_info['phone_number']=info.phone_number
+        res_info['user_time']=info.user_time
+    return JsonResponse(res_info)

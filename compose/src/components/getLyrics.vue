@@ -19,21 +19,20 @@ export default {
     const store = useStore();
     let lyrics = ref("this is a sentence");
     let developFlag = ref(true);
-    const developmentURL = "http://127.0.0.1:8000/form/getAudioPath/";
+    const developmentURL = "http://127.0.0.1:8000/lyrics/getAudioPath/";
 
     const sendAjax = () => {
       ElMessage({ showClose: true, message: "合成请求已经发送！" });
       axios
         .get(developmentURL, {
           params: {
-            // 一些请求的参数
             lyrics: lyrics.value,
           },
         })
         .then((response) => {
-          console.log("Got audio url : " + response.data);
+          console.log(response.data);
           store.commit("setAudioURLAndFlag", {
-            audioURL: response.data,
+            audioURL: response.data.music_url,
           });
           store.commit("setLyrics", lyrics);
 
