@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,6 +30,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'access.urls'
@@ -72,12 +75,23 @@ WSGI_APPLICATION = 'access.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'composer',
+#         'USER': 'access',
+#         'PASSWORD': 'access',
+#         'HOST': '119.23.182.180',
+#         'PORT': '3306',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'composer',
-        'USER': 'access',
-        'PASSWORD': 'access',
+        'NAME': 'mymess',
+        'USER': 'srp',
+        'PASSWORD': 'srp',
         'HOST': '119.23.182.180',
         'PORT': '3306',
     }
@@ -123,3 +137,14 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+STATIC_ROOT = ''
+
+
+STATICFILES_DIRS = (
+    # BASE_DIR + STATIC_URL,
+    os.path.join(BASE_DIR, STATIC_ROOT),
+)
