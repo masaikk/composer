@@ -22,21 +22,16 @@ class GanHandler():
         self.embedding_handler = Seq2EmbHandler()
         print('embedding model loaded!')
 
-    def processMelody(self, lyrics) -> str:
+    def processMelody(self, lyrics: str) -> str:
         """
-
+        格式化歌词数据，去标点以及补齐或者剪切。
 
         :param lyrics: 歌词
         :return:
         :rtype: str
         """
-        return ''
+        return lyrics
 
-    def test1(self):
-        self.gan.get_gen_data_test()
-
-    def test2(self):
-        pass
 
     def test3(self):
         user_seq_data = self.embedding_handler.seq2EmbTest()
@@ -59,7 +54,7 @@ class GanHandler():
         user_seq_data = np.expand_dims(user_seq_data, 0)
         seq_data = torch.from_numpy(np.repeat(user_seq_data, 300, axis=0))
         midi_raw_data = self.gan.npy2embedding_generator2npyData(seq_data=seq_data).numpy()
-        midi_url,mp3_url = npy2url(midi_raw_data, convert=True)
+        midi_url, mp3_url = npy2url(midi_raw_data, convert=True)
         # print(midi_url)
         return mp3_url
 

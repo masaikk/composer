@@ -4,6 +4,7 @@ from time import sleep
 from django.http import HttpResponse, JsonResponse
 
 from lyrics.utils.GanHandler import GanHandler
+from lyrics.models import MusicLog
 
 gan_handler = GanHandler()
 
@@ -50,9 +51,8 @@ INSTRUMENT_MAP = ['Acoustic Grand Piano', 'Bright Acoustic Piano',
 
 
 # Create your views here.
-def generat(request):
-    gan_handler.test1()
-    return HttpResponse('test function')
+def inner(request):
+    return HttpResponse('ａｃｃｅｓｓ')
 
 
 def get_instru_list(request):
@@ -70,7 +70,13 @@ def get_instru_list(request):
 def getAudioSynth(request):
     music_url = 'http://119.23.182.180/azur/t{}.mp3'.format(random.randint(1, 5))
     print('Audio url : {}'.format(music_url))
-    sleep(1.5)
+    sleep(0.5)
+    music_log = MusicLog()
+    music_log.sentence = request.GET.get('lyrics')
+    music_log.instru_id = int(request.GET.get('instrumentID'))
+    music_log.user_id = int(request.GET.get('uid'))
+    music_log.file_path = '--'
+    music_log.save()
     res_obj = {
         'music_url': music_url
     }
