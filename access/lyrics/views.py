@@ -1,8 +1,7 @@
 import random
 from time import sleep
 
-from django.http import HttpResponse, FileResponse, JsonResponse
-
+from django.http import HttpResponse, JsonResponse
 
 from lyrics.utils.GanHandler import GanHandler
 
@@ -56,9 +55,15 @@ def generat(request):
     return HttpResponse('test function')
 
 
-def hello(request):
+def get_instru_list(request):
+    res_list = []
+    for instru_index in range(len(INSTRUMENT_MAP)):
+        res_list.append({
+            'value': str(instru_index),
+            'name': INSTRUMENT_MAP[instru_index]
+        })
     return JsonResponse({
-        'INSTRUMENT_MAP': INSTRUMENT_MAP
+        'INSTRUMENT_MAP': res_list
     })
 
 
@@ -76,6 +81,7 @@ def getAudioSynth(request):
 def testg(request):
     return None
 
+
 def generate_music_from_lyrics(request):
-    music_url=gan_handler.test5()
+    music_url = gan_handler.test5()
     return HttpResponse(music_url)

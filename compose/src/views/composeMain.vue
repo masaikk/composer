@@ -1,11 +1,6 @@
 <template>
   <div>
-    <div>
-      <div>{{ mainPageInfo.mainName }}</div>
-      <div>
-        <h6>{{ mainPageInfo.mainPageMessage }}</h6>
-      </div>
-    </div>
+    <div></div>
     <div>
       <get-lyrics></get-lyrics>
     </div>
@@ -27,12 +22,6 @@ import getLyrics from "@/components/getLyrics";
 export default {
   name: "composeMain",
   setup() {
-    let mainPageInfo = reactive({
-      mainName: "Composer",
-      mainPageMessage: "powered by HJQ",
-      mainPageEmail: "201830660420@mail.scut.edu.cn",
-    });
-
     let audioInfo = reactive({
       defaultMessage: "default message",
       defaultAudioURL: "http://119.23.182.180/azur/t1.mp3",
@@ -47,7 +36,6 @@ export default {
     });
 
     return {
-      mainPageInfo,
       audioInfo,
     };
   },
