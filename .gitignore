@@ -18,5 +18,6 @@ bin-release/
 # information for Eclipse / Flash Builder.
 /.idea/
 /access/lyrics/utils/lyrics/
-/access/lyrics/utils/model/static/gen_800.pth
+/access/lyrics/utils/model/static/
 /access/lyrics/utils/lyrics/temp
+/access/lyrics/notebooks/word_syll_dic1.npy

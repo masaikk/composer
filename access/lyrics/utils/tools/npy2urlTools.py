@@ -4,6 +4,7 @@ import time
 import hashlib
 import os
 from lyrics.utils.tools.npyHandler import pre_process_data
+from lyrics.utils.instruments_list import INSTRUMENT_MAP
 
 
 def get_melody_name() -> str:
@@ -35,18 +36,19 @@ def get4mid_url() -> (str, str, str):
     return mid_file_path, local_path, file_name
 
 
-def npy2url(data, type: int = 1, convert: bool = False) -> (str, str):
+def npy2url(data, instru_type: int = 1, convert: bool = False) -> (str, str):
     """
 
     :param data:
-    :param type:
+    :param instru_type:
     :param convert:
     :return: mid_path, mp3path
     """
     data = pre_process_data(data)
     mid_path, local_path, file_name = get4mid_url()
     midi = pretty_midi.PrettyMIDI()
-    program = pretty_midi.instrument_name_to_program('Cello')
+    program = pretty_midi.instrument_name_to_program(INSTRUMENT_MAP[instru_type])
+    # 选择乐器
     midi_data = pretty_midi.Instrument(program=program)
 
     npy_sentence = data[0]

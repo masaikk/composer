@@ -38,16 +38,3 @@ def pre_process_data(data):
     return data
 
 
-def pre_process(path):
-    data = np.load(path, allow_pickle=True)
-
-    data_T = data.T
-    data_T[3] = np.round(data_T[3])
-    data_T[5] = np.round(data_T[5])
-
-    for pitch in range(0, len(data_T[4])):
-        for sentence in range(0, len(data_T[4][pitch])):
-            data_T[4][pitch][sentence] = approximate(data_T[4][pitch][sentence])
-
-    data = data_T.T
-    return data

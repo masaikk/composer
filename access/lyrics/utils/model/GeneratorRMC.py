@@ -30,18 +30,6 @@ class GeneratorRMC(nn.Module):
         # print('concat_lyrics size:{}'.format(concat_lyrics.shape))
         hidden = self.init_hidden(self.init_batch_size)
 
-        # all_single_out_rmc = []
-        # for i in range(concat_lyrics.shape[1]):
-        #     single_concat_lyrics = torch.unsqueeze(concat_lyrics[0:, i, 0:], 1)
-        #
-        #     out1 = F.relu(self.input_ff(single_concat_lyrics))
-        #     # print('out1 size:{}'.format(out1.shape))
-        #     # emb = self.embeddings(inp).unsqueeze(1)
-        #
-        #     out, hidden = self.rmc(out1, hidden)
-        #     # print('out size:{}'.format(out.shape))
-        #     all_single_out_rmc.append(out)
-        # out = torch.cat(tuple(all_single_out_rmc), dim=1)
 
         concat_lyrics = concat_lyrics.view(self.init_batch_size, 1, -1)
         out_line = F.relu(self.line1(concat_lyrics))

@@ -39,8 +39,8 @@ class Gan():
         self.lyrics_dim: int = 64
         self.embed_dim: int = 32
         self.cuda: bool = False
-        self.read_yaml(os.path.join(os.getcwd(), 'lyrics/utils/model/config.yaml'))
-        self.gen_path = os.path.join(os.getcwd(), 'lyrics/utils/model/static/gen_800.pth')
+        self.read_yaml(os.path.join(os.getcwd(), 'model/config.yaml'))
+        self.gen_path = os.path.join(os.getcwd(), 'model/static/gen_800.pth')
 
         self.device = torch.device('cuda:0' if self.cuda else 'cpu')
 

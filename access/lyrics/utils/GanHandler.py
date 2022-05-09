@@ -1,15 +1,9 @@
-from lyrics.utils.model.GeneratorRMC import GeneratorRMC
-from lyrics.utils.model.Dataloader import Dataloader
 from lyrics.utils.model.Gan import Gan
 from lyrics.utils.model.seq2emb import Seq2EmbHandler
 from lyrics.utils.tools.npyHandler import pre_process_data
 from lyrics.utils.tools.npy2urlTools import npy2url
 import torch
-import torch.nn as nn
-from torch.utils import data
-import yaml
-from torch import optim
-import time
+
 
 import os
 import numpy as np
@@ -21,17 +15,6 @@ class GanHandler():
         print('model loaded!')
         self.embedding_handler = Seq2EmbHandler()
         print('embedding model loaded!')
-
-    def processMelody(self, lyrics: str) -> str:
-        """
-        格式化歌词数据，去标点以及补齐或者剪切。
-
-        :param lyrics: 歌词
-        :return:
-        :rtype: str
-        """
-        return lyrics
-
 
     def test3(self):
         user_seq_data = self.embedding_handler.seq2EmbTest()
@@ -58,7 +41,20 @@ class GanHandler():
         # print(midi_url)
         return mp3_url
 
+    def test6(self):
+        user_seq_data, number = self.embedding_handler.seq2Emb('what a nice day it is at all.')
+        user_seq_data = user_seq_data.reshape((20, -1))
+        user_seq_data = np.expand_dims(user_seq_data, 0)
+
+        seq_data = torch.from_numpy(np.repeat(user_seq_data, 300, axis=0))
+        seq_data = seq_data.to(torch.float32)
+
+        midi_raw_data = self.gan.npy2embedding_generator2npyData(seq_data=seq_data).numpy()
+        midi_url, mp3_url = npy2url(midi_raw_data, instru_type=56, convert=True)
+        # print(midi_url)
+        return mp3_url
+
 
 if __name__ == '__main__':
     g = GanHandler()
-    g.test5()
+    g.test6()
