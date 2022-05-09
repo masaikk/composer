@@ -38,4 +38,3 @@ INSTRUMENT_MAP = ['Acoustic Grand Piano', 'Bright Acoustic Piano',
                   'Reverse Cymbal', 'Guitar Fret Noise', 'Breath Noise',
                   'Seashore', 'Bird Tweet', 'Telephone Ring', 'Helicopter',
                   'Applause', 'Gunshot']
-

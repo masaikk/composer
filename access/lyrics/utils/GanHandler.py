@@ -4,7 +4,6 @@ from lyrics.utils.tools.npyHandler import pre_process_data
 from lyrics.utils.tools.npy2urlTools import npy2url
 import torch
 
-
 import os
 import numpy as np
 
@@ -51,7 +50,21 @@ class GanHandler():
 
         midi_raw_data = self.gan.npy2embedding_generator2npyData(seq_data=seq_data).numpy()
         midi_url, mp3_url = npy2url(midi_raw_data, instru_type=56, convert=True)
-        # print(midi_url)
+        print("Generated music mp3 path : {}".format(mp3_url))
+        return mp3_url
+
+    def generate_audio_with_sentence_type(self, sentence: str, instru: int, convert: bool = True) -> str:
+        # 从test6修改
+        user_seq_data, number = self.embedding_handler.seq2Emb(sentence)
+        user_seq_data = user_seq_data.reshape((20, -1))
+        user_seq_data = np.expand_dims(user_seq_data, 0)
+
+        seq_data = torch.from_numpy(np.repeat(user_seq_data, 300, axis=0))
+        seq_data = seq_data.to(torch.float32)
+
+        midi_raw_data = self.gan.npy2embedding_generator2npyData(seq_data=seq_data).numpy()
+        midi_url, mp3_url = npy2url(midi_raw_data, instru_type=instru, convert=convert)
+        print("Generated music mp3 path : {}".format(mp3_url))
         return mp3_url
 
 

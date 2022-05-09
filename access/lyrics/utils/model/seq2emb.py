@@ -9,9 +9,9 @@ class Seq2EmbHandler():
         self.w2e_model = None
         self.s2e_model = None
         self.ws_dict = None
-        self.word_dict_path = os.path.join(os.getcwd(), 'model/static/word_syll_dic1.npy')
-        self.word2vec_path = os.path.join(os.getcwd(), 'model/static/wordLevelEncoder_20190419.bin')
-        self.syll2vec_path = os.path.join(os.getcwd(), 'model/static/syllEncoding_20190419.bin')
+        self.word_dict_path = os.path.join(os.getcwd(), 'lyrics/utils/model/static/word_syll_dic1.npy')
+        self.word2vec_path = os.path.join(os.getcwd(), 'lyrics/utils/model/static/wordLevelEncoder_20190419.bin')
+        self.syll2vec_path = os.path.join(os.getcwd(), 'lyrics/utils/model/static/syllEncoding_20190419.bin')
         self.load_embedding_model()
 
     def processMelody(self, lyrics: str) -> str:

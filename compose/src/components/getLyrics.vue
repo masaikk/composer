@@ -36,7 +36,7 @@ export default {
     let lyrics = ref("This is a sentence and attention is all your need .");
     let developFlag = ref(true);
 
-    const developmentURL = "http://127.0.0.1:8000/lyrics/getAudioPath/";
+    const developmentURL = "http://127.0.0.1:8000/lyrics/generateAudio/";
     const developmentInstruListURL =
       "http://127.0.0.1:8000/lyrics/getInstruList/";
 
@@ -47,12 +47,12 @@ export default {
         .get(developmentURL, {
           params: {
             lyrics: lyrics.value,
-            instrumentID: selectedInstrumentID.value,
+            instru: selectedInstrumentID.value,
             uid: store.getters.getUid(),
           },
         })
         .then((response) => {
-          console.log(response.data);
+          console.log(response.data.music_url);
           store.commit("setAudioURLAndFlag", {
             audioURL: response.data.music_url,
           });

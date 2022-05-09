@@ -39,8 +39,8 @@ class Gan():
         self.lyrics_dim: int = 64
         self.embed_dim: int = 32
         self.cuda: bool = False
-        self.read_yaml(os.path.join(os.getcwd(), 'model/config.yaml'))
-        self.gen_path = os.path.join(os.getcwd(), 'model/static/gen_800.pth')
+        self.read_yaml(os.path.join(os.getcwd(), 'lyrics/utils/model/config.yaml'))
+        self.gen_path = os.path.join(os.getcwd(), 'lyrics/utils/model/static/gen_800.pth')
 
         self.device = torch.device('cuda:0' if self.cuda else 'cpu')
 
@@ -123,7 +123,7 @@ class Gan():
         self.gen.eval()
         # seq_data=seq_data
         gen_out = self.gen(seq_data)
-        base_data_root = os.path.join(os.getcwd(), 'lyrics/temp/src/save_/{}/{}/'.format(self.this_day, self.this_time))
+        base_data_root = os.path.join(os.getcwd(), 'lyrics/utils/lyrics/temp/src/save_/{}/{}/'.format(self.this_day, self.this_time))
         if not os.path.exists(base_data_root):
             os.makedirs(base_data_root)
         npy_file_path = os.path.join(base_data_root, 'lyrics_data')
