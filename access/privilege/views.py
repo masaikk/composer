@@ -44,8 +44,9 @@ def get_log(request):
     response_logs = {"logs": []}
     for log in logs:
         response_logs['logs'].append({
-            'mid': log.mid,
+            "mid": log.mid,
             "uid": log.user_id,
+            "sentence": log.sentence,
             "instru_id": log.instru_id,
             "create_time": log.create_time,
             "duration_time": log.duration_time,
@@ -63,15 +64,15 @@ def get_user_info(request):
     """
     uid = request.GET.get('uid')
     user_info = User.objects.filter(uid=int(uid))
-    res_info={
+    res_info = {
         "uid": 0,
-        "username":'',
-        "phone_number":'',
-        "user_time":''
+        "username": '',
+        "phone_number": '',
+        "user_time": ''
     }
     for info in user_info:
-        res_info['uid']=uid
-        res_info['username']=info.username
-        res_info['phone_number']=info.phone_number
-        res_info['user_time']=info.user_time
+        res_info['uid'] = uid
+        res_info['username'] = info.username
+        res_info['phone_number'] = info.phone_number
+        res_info['user_time'] = info.user_time
     return JsonResponse(res_info)
