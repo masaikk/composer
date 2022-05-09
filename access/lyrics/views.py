@@ -9,6 +9,7 @@ from lyrics.utils.instruments_list import INSTRUMENT_MAP
 import shutil
 import os
 
+
 gan_handler = GanHandler()
 music_base_path = '/tmp/musicpath/'
 
@@ -56,6 +57,7 @@ def generate_music_from_no_lyrics(request):
 def generate_music_from_lyrics(request):
     sentence = request.GET.get('lyrics')
     instru_type = int(request.GET.get('instru'))
+    uid = int(request.GET.get('uid'))
     music_url = gan_handler.generate_audio_with_sentence_type(sentence=sentence, instru=instru_type)
     # music_url like '/home/b8313/coding/composer/access/lyrics/temp/composer_file/22_05_09/22_05_09_09_04_23/0d74914047a2b55cd8341c7b58529781.mp3'
     (file_path, server_file_name) = os.path.split(music_url)
@@ -63,6 +65,12 @@ def generate_music_from_lyrics(request):
     shutil.copyfile(music_url, os.path.join(music_base_path, server_file_name))
     server_file_path = os.path.join(server_base_path, server_file_name)
     print(server_file_path)
+    music_log = MusicLog()
+    music_log.sentence = sentence
+    music_log.instru_id = instru_type
+    music_log.user_id = uid
+    music_log.file_path = server_file_path
+    music_log.save()
     return JsonResponse({
         'music_url': server_file_path
     })

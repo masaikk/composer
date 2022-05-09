@@ -10,13 +10,14 @@
     </div>
 
     <div id="history-main">
-      <el-table :data="logData.data" stripe style="width: 100%">
-        <el-table-column prop="mid" label="Date" />
-        <el-table-column prop="uid" label="Name" />
-        <el-table-column prop="instru_id" label="Address" />
-        <el-table-column prop="create_time" label="Address" />
-        <el-table-column prop="duration_time" label="Address" />
-        <el-table-column prop="file_path" label="Address" />
+      <el-table :data="logData.data" stripe id="history-data">
+        <el-table-column prop="mid" label="mid" />
+        <el-table-column prop="uid" label="uid" />
+        <el-table-column prop="sentence" label="歌词" />
+        <el-table-column prop="instru_id" label="乐器ID" />
+        <el-table-column prop="create_time" label="创建时间" />
+        <el-table-column prop="duration_time" label="持续时间" />
+        <el-table-column prop="file_path" label="文件路径" />
       </el-table>
     </div>
     <div id="history-foot">
@@ -60,7 +61,7 @@ export default {
         });
     };
     onMounted(() => {
-      getHistoryByUid;
+      getHistoryByUid();
     });
 
     return {
@@ -74,5 +75,13 @@ export default {
 <style scoped>
 .no-inherit {
   margin: auto 0;
+}
+#history-main {
+  align-content: center;
+  width: 90%;
+}
+
+#history-data {
+  margin: 0 auto;
 }
 </style>

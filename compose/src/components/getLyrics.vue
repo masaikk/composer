@@ -15,7 +15,12 @@
           :value="instru.value"
         />
       </el-select>
-      <el-input v-model="lyrics" placeholder="Please input" clearable />
+      <el-input
+        v-model="lyrics"
+        placeholder="Please input"
+        clearable
+        id="lyrics-input"
+      />
     </div>
     <div id="gen-comp-foot">
       <el-button @click="sendMelodyGenerateInfo">合成旋律！</el-button>
@@ -81,8 +86,6 @@ export default {
     const getInstruList = () => {
       axios.get(developmentInstruListURL).then((res) => {
         instrumentList.InsList = Array.from(res.data.INSTRUMENT_MAP);
-        // instrumentList.InsList = ["1", "2", "3"];
-        // console.log(instrumentList.InsList);
         console.log("乐器数据更新成功");
       });
     };
@@ -103,4 +106,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#lyrics-input {
+  width: 60%;
+}
+</style>
