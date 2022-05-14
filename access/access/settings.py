@@ -81,27 +81,27 @@ WSGI_APPLICATION = 'access.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'composer',
-#         'USER': 'access',
-#         'PASSWORD': 'access',
-#         'HOST': '119.23.182.180',
-#         'PORT': '3306',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mymess',
-        'USER': 'srp',
-        'PASSWORD': 'srp',
+        'NAME': 'composer',
+        'USER': 'access',
+        'PASSWORD': 'access',
         'HOST': '119.23.182.180',
         'PORT': '3306',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'mymess',
+#         'USER': 'srp',
+#         'PASSWORD': 'srp',
+#         'HOST': '119.23.182.180',
+#         'PORT': '3306',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

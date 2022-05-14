@@ -1,6 +1,6 @@
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
-from privilege.models import User
+
+from privilege.models import User, Comment
 from lyrics.models import MusicLog
 
 
@@ -76,3 +76,28 @@ def get_user_info(request):
         res_info['phone_number'] = info.phone_number
         res_info['user_time'] = info.user_time
     return JsonResponse(res_info)
+
+
+def add_comment(request):
+    uid = request.GET.get('uid')
+    sentence = request.GET.get('comment')
+    comment = Comment()
+    comment.user_id = int(uid)
+    comment.comment_sentence = sentence
+    comment.save()
+    return HttpResponse('Successfully added this comment')
+
+
+def get_comments_by_uid(request):
+    uid = request.GET.get('uid')
+    comments = Comment.objects.filter(user_id=int(uid))
+    this_user_commit_list = []
+    for comment in comments:
+        user_one_comment = {
+            'cid': comment.cid,
+            'uid': uid,
+            "comment": comment.comment_sentence,
+            'time': comment.comment_time
+        }
+        this_user_commit_list.append(user_one_comment)
+    return JsonResponse({"commentData": this_user_commit_list})
