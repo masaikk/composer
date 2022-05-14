@@ -34,6 +34,11 @@ const routes = [
         name: "myself",
         component: () => import("../views/AboutMyself.vue"),
       },
+      {
+        path: "comment",
+        name: "comment",
+        component: () => import("../views/commentView.vue"),
+      },
     ],
   },
   {

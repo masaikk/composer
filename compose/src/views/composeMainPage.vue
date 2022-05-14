@@ -4,17 +4,22 @@
       <el-header>
         <div id="header-root">
           <el-container>
-            <h3>Composer</h3>
-            <div style="margin: auto 1vw">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-c"></use>
-              </svg>
-            </div>
-            <div>
-              <p>
-                欢迎您！ 用户ID为 {{ userInfo.uid }} 的用户
-                {{ userInfo.name }} !
-              </p>
+            <el-container style="width: 80%">
+              <h3>Composer</h3>
+              <div style="margin: auto 1vw">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-c"></use>
+                </svg>
+              </div>
+              <div>
+                <p>
+                  欢迎您！ 用户ID为 {{ userInfo.uid }} 的用户
+                  {{ userInfo.name }} !
+                </p>
+              </div>
+            </el-container>
+            <div id="logout-button-holder">
+              <el-button id="logout-button">注销</el-button>
             </div>
           </el-container>
         </div>
@@ -64,7 +69,10 @@
                 </el-menu-item>
                 <el-menu-item index="5">
                   <el-icon><question-filled /></el-icon>
-                  <!--                  <span>Navigator Four</span>-->
+                  <router-link to="/compose/comment">评价</router-link>
+                </el-menu-item>
+                <el-menu-item index="6">
+                  <el-icon><question-filled /></el-icon>
                   <router-link to="/compose/about">关于</router-link>
                 </el-menu-item>
               </el-menu>
@@ -159,5 +167,9 @@ nav {
   margin: 0 auto;
   justify-content: center;
   border-top: black 2px solid;
+}
+
+#logout-button-holder {
+  margin: auto 0;
 }
 </style>
