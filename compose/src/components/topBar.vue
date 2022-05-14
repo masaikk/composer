@@ -21,13 +21,6 @@
   </div>
 </template>
 
-<script setup>
-import { ref, reactive } from "vue";
-import { useStore } from "vuex";
-
-export default {
-  name: "topBar",
-};
-</script>
+<script setup></script>
 
 <style scoped></style>

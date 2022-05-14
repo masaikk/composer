@@ -94,10 +94,24 @@ def get_comments_by_uid(request):
     this_user_commit_list = []
     for comment in comments:
         user_one_comment = {
-            'cid': comment.cid,
-            'uid': uid,
+            "cid": comment.cid,
+            "uid": uid,
             "comment": comment.comment_sentence,
-            'time': comment.comment_time
+            "time": comment.comment_time
+        }
+        this_user_commit_list.append(user_one_comment)
+    return JsonResponse({"commentData": this_user_commit_list})
+
+
+def get_comments(request):
+    comments = Comment.objects.all()
+    this_user_commit_list = []
+    for comment in comments:
+        user_one_comment = {
+            "cid": comment.cid,
+            "uid": comment.user_id,
+            "comment": comment.comment_sentence,
+            "time": comment.comment_time
         }
         this_user_commit_list.append(user_one_comment)
     return JsonResponse({"commentData": this_user_commit_list})

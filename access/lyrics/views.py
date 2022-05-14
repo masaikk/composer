@@ -3,14 +3,14 @@ from time import sleep
 
 from django.http import HttpResponse, JsonResponse
 
-from lyrics.utils.GanHandler import GanHandler
+# from lyrics.utils.GanHandler import GanHandler
 from lyrics.models import MusicLog
 from lyrics.utils.instruments_list import INSTRUMENT_MAP
 import shutil
 import os
 
-
-gan_handler = GanHandler()
+# gan_handler = GanHandler()\
+gan_handler = None
 music_base_path = '/tmp/musicpath/'
 
 
