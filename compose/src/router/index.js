@@ -8,27 +8,38 @@ const routes = [
     component: HomeView,
   },
   {
-    path: "/about",
-    name: "about",
-
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    path: "/compose",
+    name: "compose",
+    component: () => import("../views/composeMainPage.vue"),
+    children: [
+      {
+        path: "about",
+        component: () => import("../views/AboutView.vue"),
+      },
+      {
+        path: "main",
+        name: "main",
+        component: () =>
+          import(
+            /* webpackChunkName: "mainComposer" */ "../views/composeMain.vue"
+          ),
+      },
+      {
+        path: "history",
+        name: "history",
+        component: () => import("../views/melodyComposeHisView.vue"),
+      },
+      {
+        path: "myself",
+        name: "myself",
+        component: () => import("../views/AboutMyself.vue"),
+      },
+    ],
   },
   {
-    path: "/main",
-    name: "main",
-    component: () =>
-      import(/* webpackChunkName: "mainComposer" */ "../views/composeMain.vue"),
-  },
-  {
-    path: "/history",
-    name: "history",
-    component: () => import("../views/melodyComposeHisView.vue"),
-  },
-  {
-    path: "/myself",
-    name: "myself",
-    component: () => import("../views/AboutMyself.vue"),
+    path: "/login",
+    name: "login",
+    component: () => import("../views/userLogin.vue"),
   },
 ];
 

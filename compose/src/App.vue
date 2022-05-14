@@ -1,104 +1,10 @@
 <template>
-  <div class="common-layout">
-    <el-container>
-      <el-header>
-        <div id="header-root">
-          <el-container>
-            <h3>Composer</h3>
-            <div style="margin: auto 1vw">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-c"></use>
-              </svg>
-            </div>
-            <div>
-              <p>
-                欢迎您！ 用户ID为 {{ userInfo.uid }} 的用户
-                {{ userInfo.name }} !
-              </p>
-            </div>
-          </el-container>
-        </div>
-      </el-header>
-      <el-container>
-        <el-aside width="200px">
-          <!--          <nav>
-            <router-link to="/">
-              <el-button>home</el-button>
-            </router-link>
-            |
-            <router-link to="/about">About</router-link>
-            |
-            <router-link to="/main">Main</router-link>
-            |
-            <router-link to="/history">history</router-link>
-          </nav>-->
-
-          <el-row class="tac">
-            <el-col :span="24">
-              <el-menu
-                default-active="2"
-                class="el-menu-vertical-demo"
-                @open="handleOpen"
-                @close="handleClose"
-              >
-                <el-sub-menu index="1">
-                  <template #title>
-                    <el-icon>
-                      <location />
-                    </el-icon>
-                    <span>Navigator One</span>
-                  </template>
-                  <el-menu-item-group title="Group One">
-                    <el-menu-item index="1-1">item one</el-menu-item>
-                    <el-menu-item index="1-2">item one</el-menu-item>
-                  </el-menu-item-group>
-                  <el-menu-item-group title="Group Two">
-                    <el-menu-item index="1-3">item three</el-menu-item>
-                  </el-menu-item-group>
-                  <el-sub-menu index="1-4">
-                    <template #title>item four</template>
-                    <el-menu-item index="1-4-1">item one</el-menu-item>
-                  </el-sub-menu>
-                </el-sub-menu>
-                <el-menu-item index="2">
-                  <el-icon>
-                    <icon-menu />
-                  </el-icon>
-                  <router-link to="/myself"> 我的信息 </router-link>
-                </el-menu-item>
-                <el-menu-item index="3">
-                  <el-icon><reading /></el-icon>
-                  <router-link to="/history">我的历史</router-link>
-                </el-menu-item>
-                <el-menu-item index="4">
-                  <el-icon><reading /></el-icon>
-                  <router-link to="/main">合成音乐</router-link>
-                </el-menu-item>
-                <el-menu-item index="5">
-                  <el-icon><question-filled /></el-icon>
-                  <!--                  <span>Navigator Four</span>-->
-                  <router-link to="/about">关于</router-link>
-                </el-menu-item>
-              </el-menu>
-            </el-col>
-          </el-row>
-        </el-aside>
-        <el-container>
-          <el-main id="main-root">
-            <router-view />
-          </el-main>
-          <el-footer>
-            <el-container id="foot-root">
-              <h3>华南理工大学 软件学院 201830660420</h3>
-            </el-container>
-          </el-footer>
-        </el-container>
-      </el-container>
-    </el-container>
+  <div>
+    <router-view />
   </div>
 </template>
 
-<script setup>
+<!--<script setup>
 import {
   Menu as IconMenu,
   QuestionFilled,
@@ -134,7 +40,7 @@ onMounted(() => {
     console.log(userInfo.name);
   });
 });
-</script>
+</script>-->
 
 <style lang="less">
 #app {
