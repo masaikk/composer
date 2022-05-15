@@ -28,8 +28,9 @@
 
 <script>
 import axios from "axios";
-import { reactive, onBeforeMount, ref } from "vue";
+import { reactive, onBeforeMount, ref, onMounted } from "vue";
 import { ElMessage } from "element-plus";
+import { getComments } from "@/apis";
 
 export default {
   name: "commentView",
@@ -42,6 +43,10 @@ export default {
 
     onBeforeMount(() => {
       flushCommentsList();
+    });
+
+    onMounted(() => {
+      getCommentsList();
     });
 
     const flushCommentsList = () => {
@@ -72,6 +77,10 @@ export default {
       }
 
       console.log(commentSentence.value);
+    };
+
+    const getCommentsList = async () => {
+      await getComments({});
     };
 
     return {
