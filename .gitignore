@@ -21,3 +21,4 @@ bin-release/
 /access/lyrics/utils/model/static/
 /access/lyrics/utils/lyrics/temp
 /access/lyrics/notebooks/word_syll_dic1.npy
+/access/.idea/

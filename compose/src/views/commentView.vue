@@ -27,8 +27,7 @@
 </template>
 
 <script>
-import axios from "axios";
-import { reactive, onBeforeMount, ref, onMounted } from "vue";
+import { reactive, onBeforeMount, ref } from "vue";
 import { ElMessage } from "element-plus";
 import { getComments } from "@/apis";
 
@@ -45,19 +44,14 @@ export default {
       flushCommentsList();
     });
 
-    onMounted(() => {
-      getCommentsList();
-    });
-
     const flushCommentsList = () => {
-      axios.get("http://127.0.0.1:8000/user/get_comments").then((res) => {
+      getComments({}).then((res) => {
         ElMessage({
           showClose: true,
           message: "一共有" + res.data.commentData.length + "条评论记录！",
           type: "success",
         });
         commentsList.data = res.data.commentData;
-        console.log(commentsList.data);
       });
     };
 
@@ -75,12 +69,7 @@ export default {
           type: "success",
         });
       }
-
       console.log(commentSentence.value);
-    };
-
-    const getCommentsList = async () => {
-      await getComments({});
     };
 
     return {

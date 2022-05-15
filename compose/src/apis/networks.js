@@ -17,6 +17,7 @@ serviceAxios.interceptors.request.use(
 serviceAxios.interceptors.response.use(
   (res) => {
     console.log(res);
+    return res;
   },
   (error) => {
     console.log(error);
