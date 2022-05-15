@@ -5,3 +5,9 @@
     <h6>201830660420@mail.scut.edu.cn</h6>
   </div>
 </template>
+
+<style scoped>
+.about {
+  background-color: aliceblue;
+}
+</style>

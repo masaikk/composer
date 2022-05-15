@@ -95,4 +95,9 @@ export default {
 #comment-header {
   margin: auto 0;
 }
+#comment-add-holder {
+  display: flex;
+  width: 60%;
+  justify-content: space-around;
+}
 </style>
