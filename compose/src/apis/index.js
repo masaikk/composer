@@ -7,3 +7,11 @@ export const getComments = (params) => {
     params,
   });
 };
+
+export const addCommentById = (params) => {
+  return serviceAxios({
+    method: "get",
+    url: "/user/add_comment",
+    params,
+  });
+};

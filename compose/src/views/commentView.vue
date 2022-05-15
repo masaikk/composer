@@ -29,11 +29,14 @@
 <script>
 import { reactive, onBeforeMount, ref } from "vue";
 import { ElMessage } from "element-plus";
-import { getComments } from "@/apis";
+import { getComments, addCommentById } from "@/apis";
+import { useStore } from "vuex";
 
 export default {
   name: "commentView",
   setup() {
+    const store = useStore();
+
     let commentsList = reactive({
       data: [],
     });
@@ -68,8 +71,14 @@ export default {
           message: "谢谢您为我们的系统留下评论！",
           type: "success",
         });
+        addCommentById({
+          uid: store.getters.getUid(),
+          comment: commentSentence.value,
+        }).then((res) => {
+          console.log(res.data);
+        });
+        console.log(commentSentence.value);
       }
-      console.log(commentSentence.value);
     };
 
     return {
