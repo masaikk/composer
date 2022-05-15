@@ -19,7 +19,7 @@
               </div>
             </el-container>
             <div id="logout-button-holder">
-              <el-button id="logout-button">注销</el-button>
+              <el-button id="logout-button" @click="logOut">注销</el-button>
             </div>
           </el-container>
         </div>
@@ -34,25 +34,12 @@
                 @open="handleOpen"
                 @close="handleClose"
               >
-                <el-sub-menu index="1">
-                  <template #title>
-                    <el-icon>
-                      <location />
-                    </el-icon>
-                    <span>Navigator One</span>
-                  </template>
-                  <el-menu-item-group title="Group One">
-                    <el-menu-item index="1-1">item one</el-menu-item>
-                    <el-menu-item index="1-2">item one</el-menu-item>
-                  </el-menu-item-group>
-                  <el-menu-item-group title="Group Two">
-                    <el-menu-item index="1-3">item three</el-menu-item>
-                  </el-menu-item-group>
-                  <el-sub-menu index="1-4">
-                    <template #title>item four</template>
-                    <el-menu-item index="1-4-1">item one</el-menu-item>
-                  </el-sub-menu>
-                </el-sub-menu>
+                <el-menu-item index="1">
+                  <el-icon>
+                    <icon-menu />
+                  </el-icon>
+                  <router-link to="/compose/myself"> 我的信息 </router-link>
+                </el-menu-item>
                 <el-menu-item index="2">
                   <el-icon>
                     <icon-menu />
@@ -100,11 +87,15 @@ import {
   QuestionFilled,
   Reading,
 } from "@element-plus/icons-vue";
-import { onMounted, nextTick, ref, reactive } from "vue";
+import { onMounted, nextTick, ref, reactive, watch } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 // 获取VueX
 const store = useStore();
+
+//获取router
+const router = useRouter();
 
 const handleOpen = (key, keyPath) => {
   console.log(key, keyPath);
@@ -116,6 +107,19 @@ let height = ref("600px");
 let userInfo = reactive({
   uid: 0,
   name: "",
+});
+
+const logOut = () => {
+  store.commit("setUid", 1);
+};
+const toMainPage = () => {
+  router.push("/");
+};
+
+watch(store.getters.getUid(), (newValue) => {
+  if (parseInt(newValue) === 0) {
+    toMainPage();
+  }
 });
 
 onMounted(() => {

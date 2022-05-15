@@ -46,6 +46,15 @@ const routes = [
     name: "login",
     component: () => import("../views/userLogin.vue"),
   },
+  {
+    path: "/404",
+    name: "404Page",
+    component: () => import("../views/my404Page.vue"),
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: "/404",
+  },
 ];
 
 const router = createRouter({
