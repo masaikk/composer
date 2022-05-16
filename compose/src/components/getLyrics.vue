@@ -1,6 +1,8 @@
 <template>
   <div id="gen-comp-root">
-    <div id="gen-comp-head">发送音乐信息</div>
+    <div id="gen-comp-head">
+      <h3>在下方输入您的歌词信息</h3>
+    </div>
 
     <div id="gen-comp-main">
       <el-select

@@ -1,7 +1,7 @@
 <template>
-  <div class="common-layout">
-    <el-container>
-      <el-header>
+  <div>
+    <top-bar>
+      <template v-slot:top-bar-header>
         <div id="header-root">
           <el-container>
             <el-container style="width: 80%">
@@ -23,73 +23,71 @@
             </div>
           </el-container>
         </div>
-      </el-header>
-      <el-container>
-        <el-aside width="200px">
-          <el-row class="tac">
-            <el-col :span="24">
-              <el-menu
-                default-active="2"
-                class="el-menu-vertical-demo"
-                @open="handleOpen"
-                @close="handleClose"
-              >
-                <el-menu-item index="1">
-                  <el-icon>
-                    <icon-menu />
-                  </el-icon>
-                  <router-link to="/compose/myself"> 我的信息 </router-link>
-                </el-menu-item>
-                <el-menu-item index="2">
-                  <el-icon>
-                    <icon-menu />
-                  </el-icon>
-                  <router-link to="/compose/myself"> 我的信息 </router-link>
-                </el-menu-item>
-                <el-menu-item index="3">
-                  <el-icon><reading /></el-icon>
-                  <router-link to="/compose/history">我的历史</router-link>
-                </el-menu-item>
-                <el-menu-item index="4">
-                  <el-icon><reading /></el-icon>
-                  <router-link to="/compose/main">合成音乐</router-link>
-                </el-menu-item>
-                <el-menu-item index="5">
-                  <el-icon><question-filled /></el-icon>
-                  <router-link to="/compose/comment">评价</router-link>
-                </el-menu-item>
-                <el-menu-item index="6">
-                  <el-icon><question-filled /></el-icon>
-                  <router-link to="/compose/about">关于</router-link>
-                </el-menu-item>
-              </el-menu>
-            </el-col>
-          </el-row>
-        </el-aside>
-        <el-container>
-          <el-main id="main-root">
-            <router-view />
-          </el-main>
-          <el-footer>
-            <el-container id="foot-root">
-              <h3>华南理工大学 软件学院 201830660420</h3>
-            </el-container>
-          </el-footer>
+      </template>
+      <template v-slot:top-bar-aside>
+        <el-row class="tac">
+          <el-col :span="24">
+            <el-menu
+              default-active="2"
+              class="el-menu-vertical-demo"
+              @open="handleOpen"
+              @close="handleClose"
+            >
+              <el-menu-item index="1">
+                <el-icon>
+                  <headset />
+                </el-icon>
+                <router-link to="/compose/main">合成音乐</router-link>
+              </el-menu-item>
+              <el-menu-item index="2">
+                <el-icon><user-filled /></el-icon>
+                <router-link to="/compose/myself"> 我的信息 </router-link>
+              </el-menu-item>
+              <el-menu-item index="3">
+                <el-icon><reading /></el-icon>
+                <router-link to="/compose/history">我的历史</router-link>
+              </el-menu-item>
+              <el-menu-item index="4">
+                <el-icon>
+                  <comment />
+                </el-icon>
+                <router-link to="/compose/comment">评价</router-link>
+              </el-menu-item>
+              <el-menu-item index="5">
+                <el-icon>
+                  <question-filled />
+                </el-icon>
+                <router-link to="/compose/about">关于</router-link>
+              </el-menu-item>
+            </el-menu>
+          </el-col>
+        </el-row>
+      </template>
+      <template v-slot:top-bar-main>
+        <router-view />
+      </template>
+      <template v-slot:top-bar-footer>
+        <el-container id="foot-root">
+          <h3>华南理工大学 软件学院 201830660420</h3>
         </el-container>
-      </el-container>
-    </el-container>
+      </template>
+    </top-bar>
   </div>
 </template>
 
 <script setup>
 import {
-  Menu as IconMenu,
+  UserFilled,
   QuestionFilled,
   Reading,
+  Headset,
+  Comment,
 } from "@element-plus/icons-vue";
 import { onMounted, nextTick, ref, reactive, watch, computed } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+
+import TopBar from "@/components/topBar";
 
 // 获取VueX
 const store = useStore();
