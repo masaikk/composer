@@ -6,7 +6,7 @@
     <div>
       <audio src="" ref="mainAudioNode" @ended="endPlay"></audio>
 
-      <el-button @click="changeAudioAndReload">change audio</el-button>
+      <el-button @click="changeAudioAndReload">播放音乐！</el-button>
     </div>
   </div>
 </template>
@@ -38,17 +38,6 @@ export default {
       let audioInfo = store.getters.audioInfo;
       return audioInfo.audioURL;
     };
-
-    /*    // 监听VueX里面存储的audioURL是否有变化,readonly
-        const audioURLFromStore = computed(() => {
-          return store.getters.audioInfo.audioURL;
-        });*/
-
-    /*    watch(audioURLFromStore, (nowValue, pastValue) => {
-          console.log("now : " + nowValue);
-          console.log("past : " + pastValue);
-          // 监听之后启动reload方法，但是需要把下面的changeAudioAndReload重写至setup
-        });*/
 
     // A function which will be used when audio play is end
     const endPlay = () => {

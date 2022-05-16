@@ -87,7 +87,7 @@ import {
   QuestionFilled,
   Reading,
 } from "@element-plus/icons-vue";
-import { onMounted, nextTick, ref, reactive, watch } from "vue";
+import { onMounted, nextTick, ref, reactive, watch, computed } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
@@ -116,7 +116,11 @@ const toMainPage = () => {
   router.push("/");
 };
 
-watch(store.getters.getUid(), (newValue) => {
+const currentId = computed(() => {
+  return store.getters.getUid();
+});
+
+watch(currentId, (newValue) => {
   if (parseInt(newValue) === 0) {
     toMainPage();
   }

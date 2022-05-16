@@ -30,9 +30,9 @@
 
 <script>
 import { reactive, ref, onBeforeMount } from "vue";
-import axios from "axios";
 import { useStore } from "vuex";
 import { ElMessage } from "element-plus";
+import { getInstrumentsList, generateMelody } from "@/apis";
 
 export default {
   name: "getLyrics",
@@ -41,21 +41,14 @@ export default {
     let lyrics = ref("This is a sentence and attention is all your need .");
     let developFlag = ref(true);
 
-    const developmentURL = "http://127.0.0.1:8000/lyrics/generateAudio/";
-    const developmentInstruListURL =
-      "http://127.0.0.1:8000/lyrics/getInstruList/";
-
     let selectedInstrumentID = ref("3");
     const sendMelodyGenerateInfo = () => {
       ElMessage({ showClose: true, message: "合成请求已经发送！" });
-      axios
-        .get(developmentURL, {
-          params: {
-            lyrics: lyrics.value,
-            instru: selectedInstrumentID.value,
-            uid: store.getters.getUid(),
-          },
-        })
+      generateMelody({
+        lyrics: lyrics.value,
+        instru: selectedInstrumentID.value,
+        uid: store.getters.getUid(),
+      })
         .then((response) => {
           console.log(response.data.music_url);
           store.commit("setAudioURLAndFlag", {
@@ -84,7 +77,7 @@ export default {
     };
     let instrumentList = reactive({ InsList: [] });
     const getInstruList = () => {
-      axios.get(developmentInstruListURL).then((res) => {
+      getInstrumentsList().then((res) => {
         instrumentList.InsList = Array.from(res.data.INSTRUMENT_MAP);
         console.log("乐器数据更新成功");
       });

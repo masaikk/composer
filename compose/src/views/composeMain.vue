@@ -22,7 +22,7 @@ export default {
   name: "composeMain",
   setup() {
     let audioInfo = reactive({
-      defaultMessage: "default message",
+      defaultMessage: "在上方输入歌词，点击下方的按钮播放音乐",
       defaultAudioURL: "http://119.23.182.180/azur/t1.mp3",
     });
 

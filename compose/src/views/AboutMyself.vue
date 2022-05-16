@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import axios from "axios";
 import { useStore } from "vuex";
 import { reactive, onBeforeMount } from "vue";
 import { ElMessage } from "element-plus";
+import { getMyInfoByUid as getMyInfoByUidAxios } from "@/apis";
 
 export default {
   name: "AboutMyself",
@@ -27,19 +27,15 @@ export default {
       accountTime: "",
     });
     const getUserInfoByUid = () => {
-      axios
-        .get("http://127.0.0.1:8000/user/user_info/", {
-          params: {
-            uid: store.getters.getUid(),
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-          userData.uid = res.data.uid;
-          userData.name = res.data.username;
-          userData.phone = res.data.phone_number;
-          userData.accountTime = res.data.user_time;
-        });
+      getMyInfoByUidAxios({
+        uid: store.getters.getUid(),
+      }).then((res) => {
+        console.log(res.data);
+        userData.uid = res.data.uid;
+        userData.name = res.data.username;
+        userData.phone = res.data.phone_number;
+        userData.accountTime = res.data.user_time;
+      });
     };
     onBeforeMount(() => {
       getUserInfoByUid();

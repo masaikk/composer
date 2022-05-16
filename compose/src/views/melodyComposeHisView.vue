@@ -27,11 +27,12 @@
 </template>
 
 <script>
-import axios from "axios";
 import { List } from "@element-plus/icons";
 import { ElMessage } from "element-plus";
+import { getLogsByUid } from "@/apis";
 // eslint-disable-next-line
 import { reactive, ref, onMounted } from "vue";
+import { useStore } from "vuex";
 
 export default {
   name: "melodyComposeHisView",
@@ -40,25 +41,22 @@ export default {
   },
 
   setup() {
+    const store = useStore();
     let logData = reactive({
       data: [],
     });
     const getHistoryByUid = () => {
-      axios
-        .get("http://127.0.0.1:8000/user/get_log", {
-          params: {
-            uid: 1,
-          },
-        })
-        .then((res) => {
-          ElMessage({
-            showClose: true,
-            message: "您有" + res.data.logs.length + "条历史记录！",
-            type: "success",
-          });
-          logData.data = res.data.logs;
-          console.log(logData.data[0]);
+      getLogsByUid({
+        uid: store.getters.getUid(),
+      }).then((res) => {
+        ElMessage({
+          showClose: true,
+          message: "您有" + res.data.logs.length + "条历史记录！",
+          type: "success",
         });
+        logData.data = res.data.logs;
+        console.log(logData.data[0]);
+      });
     };
     onMounted(() => {
       getHistoryByUid();
