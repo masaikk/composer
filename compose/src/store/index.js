@@ -8,6 +8,7 @@ export default createStore({
     isFlesh: false,
     currentUid: 1,
     currentName: "用户",
+    currentLocale: "zh",
   },
   getters: {
     audioInfo(state) {
@@ -22,6 +23,11 @@ export default createStore({
     getLyrics(state) {
       return function () {
         return state.currentLyrics;
+      };
+    },
+    getCurrentLocale(state) {
+      return function () {
+        return state.currentLocale;
       };
     },
     getUid(state) {
@@ -39,6 +45,9 @@ export default createStore({
     setAudioURLAndFlag(state, info) {
       state.currentAudioURL = info.audioURL;
       state.usedFlag = false;
+    },
+    setCurrentLocale(state, locale) {
+      state.currentLocale = locale;
     },
     setFlagFalse(state) {
       state.isUsedFlag = false;

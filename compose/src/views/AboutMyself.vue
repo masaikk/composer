@@ -1,7 +1,7 @@
 <template>
   <div id="myself-root">
     <div id="myself-head">
-      <h3>个人信息</h3>
+      <h3>{{ t("message.myselfTitle") }}</h3>
     </div>
     <div id="myself-main">{{ userData }}</div>
     <div id="myself-foot">
@@ -15,10 +15,12 @@ import { useStore } from "vuex";
 import { reactive, onBeforeMount } from "vue";
 import { ElMessage } from "element-plus";
 import { getMyInfoByUid as getMyInfoByUidAxios } from "@/apis";
+import { useI18n } from "vue-i18n";
 
 export default {
   name: "AboutMyself",
   setup() {
+    const { t } = useI18n();
     const store = useStore();
     let userData = reactive({
       uid: 0,
@@ -54,6 +56,7 @@ export default {
       userData,
       getUserInfoByUid,
       flushUserInfo,
+      t,
     };
   },
 };
